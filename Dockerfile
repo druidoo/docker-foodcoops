@@ -19,7 +19,7 @@ RUN apt-get update \
         python3-redis \
         swig \
     # pip dependencies that require build deps
-    && pip3 install pycurl \
+    && pip install pycurl \
     # purge
     && apt-get purge -yqq build-essential '*-dev' make \
     && apt-get -yqq autoremove \
@@ -42,9 +42,10 @@ RUN    ln -s $SOURCES/odoo $SOURCES/AwesomeFoodCoops/odoo \
 	&& ln -s $SOURCES/repositories/superquinquin_addons $SOURCES/AwesomeFoodCoops/superquinquin_addons \
 	&& pip install --user --no-cache-dir $SOURCES/odoo
 
+# Add patched server.py. Hacked to avoid creating a new database if it doesn't exist, when sending db_name
+ADD server.py /home/odoo/.local/lib/python3.5/site-packages/odoo/cli/
+
 # Add new entrypoints and configs
 COPY entrypoint.d/* $RESOURCES/entrypoint.d/
 COPY conf.d/* $RESOURCES/conf.d/
 
-# Add patched server.py. Hacked to avoid creating a new database if it doesn't exist, when sending db_name
-ADD server.py /usr/local/lib/python2.7/dist-packages/openerp/cli/
