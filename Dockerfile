@@ -16,10 +16,9 @@ RUN apt-get update \
         libssl-dev \
         libxml2-dev \
         libxslt1-dev \
-        python-redis \
         swig \
     # pip dependencies that require build deps
-    && pip install pycurl \
+    && pip install pycurl redis==2.10.5 \
     # purge
     #&& apt-get purge -yqq build-essential '*-dev' make \
     && apt-get -yqq autoremove \
