@@ -16,12 +16,12 @@ RUN apt-get update \
         libssl-dev \
         libxml2-dev \
         libxslt1-dev \
-        python3-redis \
+        python-redis \
         swig \
     # pip dependencies that require build deps
     && pip install pycurl \
     # purge
-    && apt-get purge -yqq build-essential '*-dev' make \
+    #&& apt-get purge -yqq build-essential '*-dev' make \
     && apt-get -yqq autoremove \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 USER odoo
