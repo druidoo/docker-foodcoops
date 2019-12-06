@@ -1,0 +1,9 @@
+
+AwesomeFoodCoops:
+    defaults:
+        depth: 1
+    remotes:
+        origin: https://github.com/AwesomeFoodCoops/odoo-production.git
+    merges:
+        - origin 9.0
+    target: origin 9.0
