@@ -31,15 +31,15 @@ COPY foodcoops.yml $RESOURCES/
 RUN autoaggregate --config "$RESOURCES/foodcoops.yml" --install --output $SOURCES
 
 # Create symlinks to simulate standard odoo deployment
-RUN    ln -s $SOURCES/odoo $SOURCES/AwesomeFoodCoops/odoo \
-	&& ln -s $SOURCES/repositories/OCA_addons $SOURCES/AwesomeFoodCoops/OCA_addons \
-	&& ln -s $SOURCES/repositories/extra_addons $SOURCES/AwesomeFoodCoops/extra_addons \
-	&& ln -s $SOURCES/repositories/intercoop_addons $SOURCES/AwesomeFoodCoops/intercoop_addons \
-	&& ln -s $SOURCES/repositories/chouettecoop_addons $SOURCES/AwesomeFoodCoops/chouettecoop_addons \
-	&& ln -s $SOURCES/repositories/louve_addons $SOURCES/AwesomeFoodCoops/louve_addons \
-	&& ln -s $SOURCES/repositories/lacagette_addons $SOURCES/AwesomeFoodCoops/lacagette_addons \
-	&& ln -s $SOURCES/repositories/smile_addons $SOURCES/AwesomeFoodCoops/smile_addons \
-	&& ln -s $SOURCES/repositories/superquinquin_addons $SOURCES/AwesomeFoodCoops/superquinquin_addons \
+RUN    ln -s $SOURCES/AwesomeFoodCoops/odoo $SOURCES/odoo \
+	&& ln -s $SOURCES/AwesomeFoodCoops/OCA_addons $SOURCES/repositories/OCA_addons \
+	&& ln -s $SOURCES/AwesomeFoodCoops/extra_addons $SOURCES/repositories/extra_addons \
+	&& ln -s $SOURCES/AwesomeFoodCoops/intercoop_addons $SOURCES/repositories/intercoop_addons \
+	&& ln -s $SOURCES/AwesomeFoodCoops/chouettecoop_addons $SOURCES/repositories/chouettecoop_addons \
+	&& ln -s $SOURCES/AwesomeFoodCoops/louve_addons $SOURCES/repositories/louve_addons \
+	&& ln -s $SOURCES/AwesomeFoodCoops/lacagette_addons $SOURCES/repositories/lacagette_addons \
+	&& ln -s $SOURCES/AwesomeFoodCoops/smile_addons $SOURCES/repositories/smile_addons \
+	&& ln -s $SOURCES/AwesomeFoodCoops/superquinquin_addons $SOURCES/repositories/superquinquin_addons \
 	&& pip install --user --no-cache-dir $SOURCES/odoo
 
 # Add patched server.py. Hacked to avoid creating a new database if it doesn't exist, when sending db_name
