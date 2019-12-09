@@ -42,7 +42,7 @@ RUN    ln -s $SOURCES/AwesomeFoodCoops/odoo $SOURCES/odoo \
 	&& pip install --user --no-cache-dir $SOURCES/odoo
 
 # Add patched server.py. Hacked to avoid creating a new database if it doesn't exist, when sending db_name
-ADD server.py /home/odoo/.local/lib/python3.5/site-packages/odoo/cli/
+ADD server.py /home/odoo/.local/lib/python2.7/site-packages/odoo/cli/
 
 # Add new entrypoints and configs
 COPY entrypoint.d/* $RESOURCES/entrypoint.d/
