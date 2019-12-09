@@ -42,9 +42,19 @@ RUN    ln -s $SOURCES/AwesomeFoodCoops/odoo $SOURCES/odoo \
 	&& pip install --user --no-cache-dir $SOURCES/odoo
 
 # Add patched server.py. Hacked to avoid creating a new database if it doesn't exist, when sending db_name
-ADD server.py /home/odoo/.local/lib/python2.7/site-packages/odoo/cli/
+ADD server.py /home/odoo/.local/lib/python2.7/site-packages/openerp/cli/
+
+# Simulate odoo bin
+RUN cp /home/odoo/.local/bin/openerp-server /home/odoo/.local/bin/odoo
+
+# Add repositories
+ARG GITHUB_USER
+ARG GITHUB_TOKEN
+ENV GITHUB_USER="$GITHUB_USER"
+ENV GITHUB_TOKEN="$GITHUB_TOKEN"
+COPY repos.yml $RESOURCES/
+RUN autoaggregate --config "$RESOURCES/repos.yml" --install --output $SOURCES/repositories
 
 # Add new entrypoints and configs
 COPY entrypoint.d/* $RESOURCES/entrypoint.d/
 COPY conf.d/* $RESOURCES/conf.d/
-
