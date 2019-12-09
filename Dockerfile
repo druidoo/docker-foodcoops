@@ -1,4 +1,4 @@
-FROM druidoo/odoo:9.0.base
+FROM druidoo/odoo:9.0-base
 
 # Add other dependencies
 USER root
