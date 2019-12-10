@@ -18,7 +18,11 @@ RUN apt-get update \
         libxslt1-dev \
         swig \
     # pip dependencies that require build deps
-    && pip install pycurl redis==2.10.5 \
+    && pip install \
+        pycurl \
+        redis==2.10.5 \
+        simplejson \
+        git+https://github.com/turnkeylinux/octohub/@master \
     # purge
     #&& apt-get purge -yqq build-essential '*-dev' make \
     && apt-get -yqq autoremove \
@@ -53,8 +57,9 @@ ARG GITHUB_TOKEN
 ENV GITHUB_USER="$GITHUB_USER"
 ENV GITHUB_TOKEN="$GITHUB_TOKEN"
 COPY repos.yml $RESOURCES/
-RUN autoaggregate --config "$RESOURCES/repos.yml" --install --output $SOURCES/repositories
+RUN autoaggregate --config "$RESOURCES/repos.yml" --output $SOURCES/repositories
 
 # Add new entrypoints and configs
+COPY bin/* /usr/local/bin/
 COPY entrypoint.d/* $RESOURCES/entrypoint.d/
 COPY conf.d/* $RESOURCES/conf.d/
