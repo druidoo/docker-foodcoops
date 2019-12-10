@@ -57,7 +57,7 @@ ARG GITHUB_TOKEN
 ENV GITHUB_USER="$GITHUB_USER"
 ENV GITHUB_TOKEN="$GITHUB_TOKEN"
 COPY repos.yml $RESOURCES/
-RUN autoaggregate --config "$RESOURCES/repos.yml" --output $SOURCES/repositories
+RUN autoaggregate --config "$RESOURCES/repos.yml" --install --output $SOURCES/repositories
 
 # Add new entrypoints and configs
 COPY bin/* /usr/local/bin/
