@@ -1,0 +1,11 @@
+#!/bin/bash
+set -ex
+
+docker image build \
+    --build-arg VCS_REF="$GIT_SHA1" \
+    --build-arg BUILD_DATE="$(date --rfc-3339 ns)" \
+    --build-arg ODOO_VERSION="$DOCKER_TAG" \
+    --build-arg GITHUB_USER="$GITHUB_USER" \
+    --build-arg GITHUB_TOKEN="$GITHUB_TOKEN" \
+    --tag "$DOCKER_REPO:$DOCKER_TAG" \
+    .
