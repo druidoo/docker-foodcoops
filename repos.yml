@@ -17,6 +17,8 @@ ingadhoc-odoo-support:
   merges:
     - origin $ODOO_VERSION
   target: origin $ODOO_VERSION
+  # Remove auto install modules
+  shell_command_after: rm -rf $SOURCES/repositories/ingadhoc-odoo-support/adhoc_*
 
 
 # OCA

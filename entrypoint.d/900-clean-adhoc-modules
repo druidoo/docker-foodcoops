@@ -1,3 +1,0 @@
-#!/bin/bash
-# This is because adhoc_modules is set to auto_install
-rm -rf src/repositories/ingadhoc-odoo-support/adhoc_*
