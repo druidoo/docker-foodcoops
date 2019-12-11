@@ -1,5 +1,8 @@
 FROM druidoo/odoo:9.0-base
 
+# Add custom requirements.txt
+COPY requirements.txt $RESOURCES/
+
 # Add other dependencies
 USER root
 RUN apt-get update \
@@ -17,6 +20,8 @@ RUN apt-get update \
         libxml2-dev \
         libxslt1-dev \
         swig \
+    # install custom requirements
+    && pip install -r "$RESOURCES/requirements.txt" \
     # pip dependencies that require build deps
     && pip install \
         pycurl \
