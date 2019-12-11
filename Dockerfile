@@ -5,8 +5,7 @@ COPY requirements.txt $RESOURCES/
 
 # Add other dependencies
 USER root
-RUN apt-get update \
-    && apt-get install -y \
+RUN apt-get update && apt-get install -y \
         build-essential \
         libcups2-dev \
         libcurl4-openssl-dev \
@@ -19,6 +18,9 @@ RUN apt-get update \
         libssl-dev \
         libxml2-dev \
         libxslt1-dev \
+        libglib2.0-dev \
+        libgirepository1.0-dev \
+        libcairo2-dev \
         swig \
     # install custom requirements
     && pip install -r "$RESOURCES/requirements.txt" \
