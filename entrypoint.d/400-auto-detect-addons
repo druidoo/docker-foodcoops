@@ -11,10 +11,13 @@ if [ -d "$SOURCES/enterprise" ]; then
 	ODOO_ADDONS=$SOURCES/enterprise/,$ODOO_ADDONS
 fi
 
-foodcoops_addons=$(find $SOURCES/repositories -mindepth 1 -maxdepth 1 -type l | sort | tr '\n' ',')
-addons=$(find $CUSTOM/repositories $SOURCES/repositories -mindepth 1 -maxdepth 1 -type d | sort | tr '\n' ',')
+foodcoops_custom_addons=$(find $CUSTOM/repositories -mindepth 1 -maxdepth 1 -type l | sort | tr '\n' ',')
+custom_addons=$(find $CUSTOM/repositories -mindepth 1 -maxdepth 1 -type d | sort | tr '\n' ',')
 
-addons=${foodcoops_addons}${addons}${ODOO_ADDONS}
+foodcoops_addons=$(find $SOURCES/repositories -mindepth 1 -maxdepth 1 -type l | sort | tr '\n' ',')
+addons=$(find $SOURCES/repositories -mindepth 1 -maxdepth 1 -type d | sort | tr '\n' ',')
+
+addons=${foodcoops_custom_addons}${custom_addons}${foodcoops_addons}${addons}${ODOO_ADDONS}
 
 echo "
 [options]
