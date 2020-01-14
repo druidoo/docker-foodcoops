@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y \
         libgirepository1.0-dev \
         libcairo2-dev \
         swig \
+        wget \
+        ftp \
     # install custom requirements
     && pip install -r "$RESOURCES/requirements.txt" \
     # pip dependencies that require build deps
