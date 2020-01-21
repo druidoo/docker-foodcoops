@@ -21,9 +21,15 @@ RUN apt-get update && apt-get install -y \
         libglib2.0-dev \
         libgirepository1.0-dev \
         libcairo2-dev \
+        cabextract \
+        fonts-dejavu \
         swig \
         wget \
         ftp \
+    # Install wkhtmltopdf 0.12.1
+    && curl -SLo wkhtmltox.deb https://builds.wkhtmltopdf.org/0.12.1.3/wkhtmltox_0.12.1.3-1~jessie_amd64.deb \
+    && dpkg --install wkhtmltox.deb \
+    && rm wkhtmltox.deb \
     # install custom requirements
     && pip install -r "$RESOURCES/requirements.txt" \
     # pip dependencies that require build deps
@@ -32,6 +38,10 @@ RUN apt-get update && apt-get install -y \
         redis==2.10.5 \
         simplejson \
         git+https://github.com/turnkeylinux/octohub/@master \
+    # Install msfonts
+    && curl -SLo ttfmscorefonts.deb http://ftp.us.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb \
+    && dpkg --install ttfmscorefonts.deb \
+    && rm ttfmscorefonts.deb \
     # purge
     #&& apt-get purge -yqq build-essential '*-dev' make \
     && apt-get -yqq autoremove \
